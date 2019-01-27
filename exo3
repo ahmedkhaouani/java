@@ -1,0 +1,32 @@
+import java.io.IOException;
+
+public class Exercice3 {
+
+    public static void main(String[] args) throws IOException {
+
+
+        int nb = 10;
+        int total = 0;
+        String tab[] = {"1", "2", "3" , "4", "5"};
+        for( int i = 0; i < 5; i++ ) {
+
+            total += tab[i];
+        }
+        double moyenne = total / 5;
+
+        try
+        {
+            int i=Integer.decode();
+
+            System.out.print(i);
+        }catch(NumberFormatException  e)
+        {
+            System.out.print("No");}
+
+
+
+
+
+    }
+
+}
