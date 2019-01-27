@@ -1,0 +1,229 @@
+import java.io.*;
+
+import java.time.Duration;
+
+import java.time.Instant;
+
+import java.util.ArrayList;
+
+import java.util.Scanner;
+
+
+
+public class LireFichier {
+
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        Instant start = Instant.now();
+
+
+
+        lireLignes();
+
+        calculMoyenne();
+
+        retrouverEtudiant();
+
+        Duration duration = Duration.between(start, Instant.now());
+
+        System.out.println("Durée d'execution: " + duration.toMillis());
+
+    }
+
+
+
+    public static void lireLignes() {
+
+        String fileName = "fichier.txt";
+
+        File file = new File(fileName);
+
+        FileReader fr = null;
+
+        ArrayList<Double> nombres = new ArrayList<>();
+
+        try {
+
+            fr = new FileReader(file);
+
+
+
+            BufferedReader br = new BufferedReader(fr);
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                nombres.add(Double.parseDouble(line.split(":")[1]));
+
+                System.out.println(line);
+
+            }
+
+
+
+            int i;
+
+            double sum = 0;
+
+            for (i = 1; i < nombres.size(); i++)
+
+                sum += nombres.get(i);
+
+
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+
+
+    }
+
+
+
+
+
+    public static Double calculMoyenne() {
+
+        String fileName = "fichier.txt";
+
+        File file = new File(fileName);
+
+        FileReader fr = null;
+
+        ArrayList<Double> nombres = new ArrayList<>();
+
+
+
+        Double moy = 0.0;
+
+        try {
+
+            fr = new FileReader(file);
+
+
+
+            BufferedReader br = new BufferedReader(fr);
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                nombres.add(Double.parseDouble(line.split(":")[1]));
+
+                System.out.println(line);
+
+            }
+
+
+
+            int i;
+
+            double sum = 0;
+
+            for (i = 1; i < nombres.size(); i++)
+
+                sum += nombres.get(i);
+
+
+
+            moy = sum / nombres.size();
+
+            System.out.println("\nMoyenne : " + moy);
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return moy;
+
+    }
+
+
+
+
+
+    public static void retrouverEtudiant() {
+
+        Scanner reader = null;
+
+        String fileName = "fichier.txt";
+
+        File file = new File(fileName);
+
+        FileReader fr = null;
+
+        Double points = 0.0;
+
+        String adresse = "";
+
+        boolean trouve = false;
+
+        try {
+
+            fr = new FileReader(file);
+
+            reader = new Scanner(System.in);
+
+            System.out.println("Donner l'adresse a rechercher : ");
+
+            adresse = reader.nextLine();
+
+
+
+            BufferedReader br = new BufferedReader(fr);
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                if (adresse.equals(line.split(":")[0])) {
+
+                    trouve = true;
+
+                    points = Double.parseDouble(line.split(":")[1]);
+
+                    System.out.println("L'etudiant " + adresse + " a obtenu " + points + " points");
+
+                }
+
+            }
+
+
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+
+
+        if (!trouve) {
+
+            System.out.println(adresse + " n'est pas dans le fichier");
+
+        }
+
+    }
+
+}
